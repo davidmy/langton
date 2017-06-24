@@ -1,0 +1,23 @@
+{
+	"langton_colony" :
+	{
+		"ants" :
+		[
+			{
+				"x" : 100,
+				"y" : 100,
+				"turn" : [ "left", "right", "left" ]
+			},
+			{
+				"x" : 150,
+				"y" : 100,
+				"turn" : [ "right", "left", "left" ]
+			}
+		],
+		"grid" :
+		{
+			"height" : 200,
+			"width" : 300
+		}
+	}
+}

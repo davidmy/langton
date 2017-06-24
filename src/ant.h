@@ -3,6 +3,8 @@
 
 #include "Grid.h"
 
+#include <vector>
+
 class Ant;
 
 class Ant
@@ -12,14 +14,15 @@ public:
   unsigned char color[3];
   int heading;
 
-  bool *turn_left;
-  int num_states;
+  std::vector<bool> turn_left;
 
 public:
   Ant(int x, int y, int h=0);
   ~Ant();
+
+  int num_states() { return turn_left.size(); }
 };
 
-void simulate(Grid& g, Ant& a);
+void simulate(Grid* g, Ant* a);
 
 #endif

@@ -23,8 +23,12 @@ A simple implementation of Langton's Ant using SDL2.
     cd build
     cmake .. -G 'MSYS Makefiles'
 
-### Build & run ###
+#### Build & run ####
 
     cmake --build .
     cd ..
     build/langton
+
+#### Configure ####
+
+The size of the grid, the number of ants, and the behavior of the ants can be changed by editing `langton.json`.
