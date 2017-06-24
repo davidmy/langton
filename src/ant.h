@@ -10,12 +10,13 @@ class Ant;
 class Ant
 {
 public:
-  enum move_type { turn_left, turn_right, move_forward, turn_back };
+  enum move_type { turn_left, turn_right, move_forward, turn_back, wait, random };
 
 public:
   int x, y;
   unsigned char color[3];
   int heading;
+  int waiting;
 
   std::vector<move_type> move;
 

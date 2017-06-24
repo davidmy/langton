@@ -1,5 +1,7 @@
 #include "ant.h"
 
+#include <cstdlib>
+
 #define H2X(h) ((h)==0? 1: (h)==2? -1: 0)
 #define H2Y(h) ((h)==1? 1: (h)==3? -1: 0)
 
@@ -8,6 +10,7 @@ Ant::Ant(int x, int y, int h)
   ,color{255, 0, 0}
   ,heading(h)
   ,move{turn_left, turn_right}
+  ,waiting(0)
 {
 
 }
@@ -37,12 +40,28 @@ void simulate(Grid* g, Ant* a)
         break;
       case Ant::move_forward:
         break;
+      case Ant::turn_back:
+        a->heading = (a->heading+2)%4;
+        break;
+      case Ant::wait:
+        a->waiting++;
+        break;
+      case Ant::random:
+        a->heading = rand()%4;
+        break;
     }
     (*g)[a->x][a->y] = (value+1)%a->num_states();
   }
 
-  a->x = a->x + H2X(a->heading);
-  a->y = a->y + H2Y(a->heading);
+  if (a->waiting <= 0)
+  {
+    a->x = a->x + H2X(a->heading);
+    a->y = a->y + H2Y(a->heading);
+  }
+  else
+  {
+    a->waiting--;
+  }
 
   if (a->x < 0) a->x += g->width;
   else if (a->x >= g->width) a->x -= g->width;
