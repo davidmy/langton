@@ -45,6 +45,7 @@ LoadedSimulation* LoadedSimulation::load_json(Json::Value& val)
       if (j_turn[i] == "left") ant->move.push_back(Ant::turn_left);
       else if (j_turn[i] == "right") ant->move.push_back(Ant::turn_right);
       else if (j_turn[i] == "ahead") ant->move.push_back(Ant::move_forward);
+      else if (j_turn[i] == "back") ant->move.push_back(Ant::turn_back);
     }
 
     sim->m_loaded_ants.push_back(ant);

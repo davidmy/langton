@@ -10,7 +10,7 @@ class Ant;
 class Ant
 {
 public:
-  enum move_type { turn_left, turn_right, move_forward };
+  enum move_type { turn_left, turn_right, move_forward, turn_back };
 
 public:
   int x, y;
