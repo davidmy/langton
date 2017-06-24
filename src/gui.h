@@ -44,6 +44,7 @@ private:
   SDL_Renderer *m_ren;
   SDL_Texture *m_button_tex;
   std::vector<Button*> m_buttons;
+  bool m_show_buttons;
 
   Simulation* m_sim;
 

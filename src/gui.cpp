@@ -67,6 +67,7 @@ MainWindow::MainWindow(int width, int height)
   ,m_win(NULL)
   ,m_ren(NULL)
   ,m_sim(NULL)
+  ,m_show_buttons(false)
 {
   m_win = SDL_CreateWindow(
     "Langton's ant " LANGTON_VERSION_STR,
@@ -144,6 +145,12 @@ int MainWindow::handle_events()
       case SDL_MOUSEBUTTONDOWN:
       case SDL_MOUSEBUTTONUP:
         for (int i = 0; i < 4; i++) m_buttons[i]->handle_event(e);
+        break;
+
+      case SDL_MOUSEMOTION:
+        if (e.motion.x < (32*4+64) && e.motion.y < (32*1+64)) m_show_buttons = true;
+        else m_show_buttons = false;
+        break;
     }
   }
   return 0;
@@ -171,7 +178,10 @@ void MainWindow::draw()
     for (int i=0; i<ants.size(); i++) if (ants[i] != NULL) draw_ant(ants[i]);
   }
 
-  for (int i = 0; i < 4; i++) m_buttons[i]->draw(m_ren);
+  if (m_show_buttons)
+  {
+    for (int i = 0; i < 4; i++) m_buttons[i]->draw(m_ren);
+  }
 
   SDL_RenderPresent(m_ren);
 
