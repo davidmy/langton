@@ -2,7 +2,7 @@
 #define H_BUTTON
 
 #include <vector>
-#include <sdl2/sdl.h>
+#include <SDL2/SDL.h>
 
 class Button;
 

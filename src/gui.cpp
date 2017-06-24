@@ -9,7 +9,7 @@
 #include <iostream>
 #include <stdexcept>
 
-#include <sdl2/sdl.h>
+#include <SDL2/SDL.h>
 
 unsigned char colors[14][3] = {
   {255, 255, 255},  // white

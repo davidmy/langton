@@ -32,6 +32,12 @@ target_link_libraries(langton
   jsoncpp
 )
 
+if(UNIX)
+  target_include_directories(langton
+    PRIVATE "/usr/include/jsoncpp"
+  )
+endif()
+
 install(TARGETS langton DESTINATION .)
 install(DIRECTORY data DESTINATION .)
 install(FILES langton.json DESTINATION .)

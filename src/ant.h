@@ -1,7 +1,7 @@
 #ifndef ANT_H
 #define ANT_H
 
-#include "Grid.h"
+#include "grid.h"
 
 #include <vector>
 

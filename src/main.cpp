@@ -6,7 +6,7 @@
 #include <fstream>
 #include <vector>
 
-#include <sdl2/sdl.h>
+#include <SDL2/SDL.h>
 
 #include "grid.h"
 #include "ant.h"
@@ -21,7 +21,7 @@
 
 int main(int argc, char** argv)
 {
-  std::cout << "Langton's Ant with SDL2" LANGTON_VERSION_STR << std::endl;
+  std::cout << "Langton's Ant " LANGTON_VERSION_STR << std::endl;
 
   if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
   {
