@@ -24,3 +24,4 @@ target_link_libraries(langton
 )
 
 install(TARGETS langton DESTINATION .)
+install(DIRECTORY data DESTINATION .)

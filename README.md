@@ -2,7 +2,7 @@
 
 A simple implementation of Langton's Ant using SDL2.
 
-![Screenshot](./screenshot.png)
+![Screenshot](./anim-v1.1.gif)
 
 #### Prequisites ####
 
@@ -16,11 +16,15 @@ A simple implementation of Langton's Ant using SDL2.
 - CMake (`mingw-w64-x86_64-cmake`)
 - SDL2 (`mingw-w64-x86_64-SDL2`)
 
-#### Build & run ###
+#### Configure ###
 
     cd langton
     mkdir build
     cd build
     cmake .. -G 'MSYS Makefiles'
+
+### Build & run ###
+
     cmake --build .
-    ./langton
+    cd ..
+    build/langton

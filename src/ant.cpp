@@ -7,29 +7,33 @@ Ant::Ant(int x, int y, int h)
   :x(x), y(y)
   ,color{255, 0, 0}
   ,heading(h)
+  ,turn_left(new bool[9]
+    {true, true, false, false,
+     true, false, false, true,
+     false})
+  ,num_states(3)
 {
 
 }
 
 Ant::~Ant()
 {
-
+  delete[] turn_left;
 }
 
 void simulate(Grid& g, Ant& a)
 {
   int value = g[a.x][a.y];
 
-  if (value == 0)
+  if (a.turn_left[value])
   {
-    g[a.x][a.y] = 1;
-    a.heading = (a.heading+1)%4;
+    a.heading = (a.heading+3)%4;
   }
   else
   {
-    g[a.x][a.y] = 0;
-    a.heading = (a.heading+3)%4;
+    a.heading = (a.heading+1)%4;
   }
+  g[a.x][a.y] = (value+1)%a.num_states;
 
   a.x = a.x + H2X(a.heading);
   a.y = a.y + H2Y(a.heading);

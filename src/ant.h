@@ -12,6 +12,9 @@ public:
   unsigned char color[3];
   int heading;
 
+  bool *turn_left;
+  int num_states;
+
 public:
   Ant(int x, int y, int h=0);
   ~Ant();
