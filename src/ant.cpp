@@ -7,9 +7,7 @@ Ant::Ant(int x, int y, int h)
   :x(x), y(y)
   ,color{255, 0, 0}
   ,heading(h)
-  ,turn_left{true, true, false, false,
-     true, false, false, true,
-     false}
+  ,move{turn_left, turn_right}
 {
 
 }
@@ -23,18 +21,23 @@ void simulate(Grid* g, Ant* a)
 {
   int value = (*g)[a->x][a->y];
 
-  if (a->turn_left.size() <= value)
+  if (a->move.size() <= value)
   {
     (*g)[a->x][a->y] = 0;
   }
-  else if (a->turn_left[value])
-  {
-    a->heading = (a->heading+3)%4;
-    (*g)[a->x][a->y] = (value+1)%a->num_states();
-  }
   else
   {
-    a->heading = (a->heading+1)%4;
+    switch (a->move[value])
+    {
+      case Ant::turn_left:
+          a->heading = (a->heading+1)%4;
+        break;
+      case Ant::turn_right:
+        a->heading = (a->heading+3)%4;
+        break;
+      case Ant::move_forward:
+        break;
+    }
     (*g)[a->x][a->y] = (value+1)%a->num_states();
   }
 
