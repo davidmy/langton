@@ -35,7 +35,14 @@ int main(int argc, char** argv)
 
     Json::Value val;
 
-    std::ifstream config_file("langton.json");
+    const char *config_fn = "langton.json";
+
+    if (argc > 1)
+    {
+      config_fn = argv[1];
+    }
+
+    std::ifstream config_file(config_fn);
     if (config_file.good())
     {
       config_file >> val;

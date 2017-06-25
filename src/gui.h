@@ -17,7 +17,8 @@ class Ant;
 class Grid;
 class Simulation;
 
-#define TILE_SIZE (8/2)
+#define TILE_SIZE 3
+#define TILE_OFFSET 4
 #define ANT_OFFSET 1
 #define ANT_SIZE (TILE_SIZE-2*ANT_OFFSET)
 

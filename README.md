@@ -4,29 +4,36 @@ A simple implementation of Langton's Ant using SDL2.
 
 ![Screenshot](images/anim-v1.1.gif)
 
+- [About Langton's Ant](https://en.wikipedia.org/wiki/Langton%27s_ant)
+
 #### Prequisites ####
 
-- MSYS2
-- MinGW
+###### Supported builds ######
 
-#### MSYS2 packages required ####
+- Windows (MSYS2+MinGW)
+- Linux
 
-- gcc (`mingw-w64-x86_64-gcc`)
-- make (`mingw-w64-x86_64-make`)
-- CMake (`mingw-w64-x86_64-cmake`)
-- SDL2 (`mingw-w64-x86_64-SDL2`)
+###### Packages required ######
 
-#### Configure ###
+| Name    | MinGW32/64        | Linux            |
+|---------|-------------------|------------------|
+| gcc     | `mingw-*-*-gcc`   | `gcc`            |
+| make    | `mingw-*-*-make`  | `make`           |
+| CMake   | `mingw-*-*-cmake` | `cmake`          |
+| SDL2    | `mingw-*-*-SDL2`  | `libsdl2-dev`    |
+| JsonCpp | *(included)*      | `libjsoncpp-dev` |
 
-    cd langton
-    mkdir build
-    cd build
+#### Build (MSYS2/Linux) ####
+
+###### Configure ######
+
+    cd langton/build
     cmake .. -G 'MSYS Makefiles'
-
-#### Build & run ####
-
-    cmake --build .
     cd ..
+
+###### Build & run ######
+
+    cd build ; cmake --build . ; cd ..
     build/langton
 
 #### Configure ####

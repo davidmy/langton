@@ -166,7 +166,7 @@ void MainWindow::tick()
 
 void MainWindow::draw()
 {
-  SDL_SetRenderDrawColor(m_ren, 200, 200, 200, 255);
+  SDL_SetRenderDrawColor(m_ren, 128, 128, 128, 255);
   SDL_RenderClear(m_ren);
 
   if (m_sim != NULL)
@@ -207,7 +207,7 @@ void MainWindow::draw_grid(Grid *g)
   {
     for (int x = 0; x < g->width; x++)
     {
-      SDL_Rect r = { x*TILE_SIZE, y*TILE_SIZE, TILE_SIZE, TILE_SIZE };
+      SDL_Rect r = { x*TILE_OFFSET, y*TILE_OFFSET, TILE_SIZE, TILE_SIZE };
       int i = (*g)[x][y];
       SDL_SetRenderDrawColor(m_ren, colors[i][0], colors[i][1], colors[i][2], 255);
       SDL_RenderFillRect(m_ren, &r);
