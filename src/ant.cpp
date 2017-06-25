@@ -6,8 +6,8 @@
 #define H2Y(h) ((h)==1? 1: (h)==3? -1: 0)
 
 Ant::Ant(int x, int y, int h)
-  :x(x), y(y)
-  ,color{255, 0, 0}
+  :pos(x, y)
+  ,color{128, 0, 0}
   ,heading(h)
   ,move{turn_left, turn_right}
   ,waiting(0)
@@ -22,49 +22,52 @@ Ant::~Ant()
 
 void simulate(Grid* g, Ant* a)
 {
-  int value = (*g)[a->x][a->y];
+  int value = g->at(a->pos);
+  int num_headings = g->type==Grid::square? 4: g->type==Grid::hex? 6: 4;
 
   if (a->move.size() <= value)
   {
-    (*g)[a->x][a->y] = 0;
+    g->at(a->pos) = 0;
   }
   else
   {
     switch (a->move[value])
     {
       case Ant::turn_left:
-          a->heading = (a->heading+1)%4;
+          a->heading = (a->heading+3)%num_headings;
         break;
       case Ant::turn_right:
-        a->heading = (a->heading+3)%4;
+        a->heading = (a->heading+1)%num_headings;
+        break;
+      case Ant::hard_left:
+          a->heading = (a->heading+4)%num_headings;
+        break;
+      case Ant::hard_right:
+        a->heading = (a->heading+2)%num_headings;
         break;
       case Ant::move_forward:
         break;
       case Ant::turn_back:
-        a->heading = (a->heading+2)%4;
+        a->heading = (a->heading+num_headings/2)%num_headings;
         break;
       case Ant::wait:
         a->waiting++;
         break;
       case Ant::random:
-        a->heading = rand()%4;
+        a->heading = rand()%num_headings;
         break;
     }
-    (*g)[a->x][a->y] = (value+1)%a->num_states();
+    g->at(a->pos) = (value+1)%a->num_states();
   }
 
   if (a->waiting <= 0)
   {
-    a->x = a->x + H2X(a->heading);
-    a->y = a->y + H2Y(a->heading);
+    g->move(a->pos, a->heading);
   }
   else
   {
     a->waiting--;
   }
 
-  if (a->x < 0) a->x += g->width;
-  else if (a->x >= g->width) a->x -= g->width;
-  if (a->y < 0) a->y += g->height;
-  else if (a->y >= g->height) a->y -= g->height;
+  g->normalize(a->pos);
 }

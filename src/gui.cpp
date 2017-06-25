@@ -68,6 +68,15 @@ MainWindow::MainWindow(int width, int height)
   ,m_ren(NULL)
   ,m_sim(NULL)
   ,m_show_buttons(false)
+  ,m_odd_offset(0)
+  ,m_tile_width(TILE_HEIGHT) // TILE_WIDTH only when grid type is hex
+  ,m_tile_height(TILE_HEIGHT)
+  ,m_tile_x_offset(TILE_Y_OFFSET) // TILE_X_OFFSET only when grid type is hex
+  ,m_tile_y_offset(TILE_Y_OFFSET)
+  ,m_ant_width(ANT_SIZE)
+  ,m_ant_height(ANT_SIZE)
+  ,m_ant_x_offset(ANT_OFFSET)
+  ,m_ant_y_offset(ANT_OFFSET)
 {
   m_win = SDL_CreateWindow(
     "Langton's ant " LANGTON_VERSION_STR,
@@ -175,7 +184,7 @@ void MainWindow::draw()
     if (grid != NULL) draw_grid(grid);
 
     const std::vector<Ant*> &ants = m_sim->get_ants();
-    for (int i=0; i<ants.size(); i++) if (ants[i] != NULL) draw_ant(ants[i]);
+    for (int i=0; i<ants.size(); i++) if (ants[i] != NULL) draw_ant(grid, ants[i]);
   }
 
   if (m_show_buttons)
@@ -196,7 +205,33 @@ void MainWindow::set_sim(Simulation *sim)
     Grid* grid = m_sim->get_grid();
     if (grid != NULL)
     {
-      SDL_SetWindowSize(m_win, grid->width*TILE_SIZE, grid->height*TILE_SIZE);
+      switch (grid->type)
+      {
+        case Grid::hex:
+          m_tile_width = TILE_WIDTH;
+          m_tile_height = TILE_HEIGHT;
+          m_tile_x_offset = TILE_X_OFFSET;
+          m_tile_y_offset = TILE_Y_OFFSET;
+          m_odd_offset = TILE_X_OFFSET/2;
+          m_ant_width = ANT_SIZE;
+          m_ant_height = ANT_SIZE;
+          m_ant_x_offset = ANT_OFFSET;
+          m_ant_y_offset = ANT_OFFSET;
+          break;
+        case Grid::square:
+          m_tile_width = TILE_HEIGHT;
+          m_tile_height = TILE_HEIGHT;
+          m_tile_x_offset = TILE_Y_OFFSET;
+          m_tile_y_offset = TILE_Y_OFFSET;
+          m_odd_offset = 0;
+          m_ant_width = ANT_SIZE;
+          m_ant_height = ANT_SIZE;
+          m_ant_x_offset = ANT_OFFSET;
+          m_ant_y_offset = ANT_OFFSET;
+          break;
+      }
+
+      SDL_SetWindowSize(m_win, grid->width*m_tile_x_offset+m_odd_offset, grid->height*m_tile_y_offset);
     }
   }
 }
@@ -207,7 +242,7 @@ void MainWindow::draw_grid(Grid *g)
   {
     for (int x = 0; x < g->width; x++)
     {
-      SDL_Rect r = { x*TILE_OFFSET, y*TILE_OFFSET, TILE_SIZE, TILE_SIZE };
+      SDL_Rect r = { x*m_tile_x_offset+m_odd_offset*(y%2), y*m_tile_y_offset, m_tile_width, m_tile_height };
       int i = (*g)[x][y];
       SDL_SetRenderDrawColor(m_ren, colors[i][0], colors[i][1], colors[i][2], 255);
       SDL_RenderFillRect(m_ren, &r);
@@ -215,9 +250,9 @@ void MainWindow::draw_grid(Grid *g)
   }
 }
 
-void MainWindow::draw_ant(Ant *a)
+void MainWindow::draw_ant(Grid *g, Ant *a)
 {
-  SDL_Rect r = {a->x*TILE_SIZE+ANT_OFFSET, a->y*TILE_SIZE+ANT_OFFSET, ANT_SIZE, ANT_SIZE};
+  SDL_Rect r = {a->pos.x*m_tile_x_offset+m_ant_x_offset+m_odd_offset*(a->pos.y%2), a->pos.y*m_tile_x_offset+m_ant_y_offset, m_ant_width, m_ant_height};
   SDL_SetRenderDrawColor(m_ren, a->color[0], a->color[1], a->color[2], 255);
   SDL_RenderFillRect(m_ren, &r);
 }

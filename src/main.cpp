@@ -31,7 +31,7 @@ int main(int argc, char** argv)
 
   try
   {
-    MainWindow *win = new MainWindow(GRID_WIDTH*TILE_SIZE, GRID_HEIGHT*TILE_SIZE);
+    MainWindow *win = new MainWindow(800, 600);
 
     Json::Value val;
 

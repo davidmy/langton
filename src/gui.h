@@ -17,10 +17,16 @@ class Ant;
 class Grid;
 class Simulation;
 
-#define TILE_SIZE 3
-#define TILE_OFFSET 4
-#define ANT_OFFSET 1
-#define ANT_SIZE (TILE_SIZE-2*ANT_OFFSET)
+#define TILE_WIDTH 3
+#define TILE_HEIGHT 3
+
+#define TILE_X_OFFSET 4
+#define TILE_Y_OFFSET 4
+
+#define TILE_ODD_OFFSET (TILE_X_OFFSET/2)
+
+#define ANT_OFFSET -1
+#define ANT_SIZE 5
 
 #define EVENT_QUIT 1
 
@@ -31,7 +37,7 @@ public:
   ~MainWindow();
 
   void draw_grid(Grid *g);
-  void draw_ant(Ant *a);
+  void draw_ant(Grid *g, Ant *a);
 
   int handle_events();
   void draw();
@@ -48,6 +54,16 @@ private:
   bool m_show_buttons;
 
   Simulation* m_sim;
+
+  int m_odd_offset;
+  int m_tile_width;
+  int m_tile_height;
+  int m_tile_x_offset;
+  int m_tile_y_offset;
+  int m_ant_width;
+  int m_ant_height;
+  int m_ant_x_offset;
+  int m_ant_y_offset;
 
 public:
   void set_sim(Simulation *sim);

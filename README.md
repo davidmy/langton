@@ -91,5 +91,19 @@ The size of the grid, the number of ants, and the behavior of the ants can be ch
 }
 ```
 
-
 ![Framed picture](images/example03.png)
+
+##### Triangles #####
+
+```json
+{
+  "langton_colony": {
+    "ants": [
+      { "x": 100, "y": 100, "turn": [ "ahead", "hard left", "back" ]  }
+    ],
+    "grid" : { "height": 200, "width": 300, "type": "hex" }
+  }
+}
+```
+
+![Framed picture](images/example04.png)

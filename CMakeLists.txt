@@ -23,6 +23,8 @@ set(SOURCES
   "${SRC_DIR}/simulation.cpp"
   "${SRC_DIR}/loadedsimulation.h"
   "${SRC_DIR}/loadedsimulation.cpp"
+  "${SRC_DIR}/types.h"
+  "${SRC_DIR}/types.cpp"
 )
 
 add_executable(langton ${SOURCES})

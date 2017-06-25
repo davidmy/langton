@@ -2,6 +2,7 @@
 #define ANT_H
 
 #include "grid.h"
+#include "types.h"
 
 #include <vector>
 
@@ -10,10 +11,10 @@ class Ant;
 class Ant
 {
 public:
-  enum move_type { turn_left, turn_right, move_forward, turn_back, wait, random };
+  enum move_type { turn_left, turn_right, hard_left, hard_right, move_forward, turn_back, wait, random };
 
 public:
-  int x, y;
+  vec2i pos;
   unsigned char color[3];
   int heading;
   int waiting;
