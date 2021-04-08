@@ -6,7 +6,8 @@ if not conan:
 else:
     env.MergeFlags(conan["conan"])
 
-env.Append(CXXFLAGS=["-MD"])
+if env['PLATFORM'] == 'nt':
+    env.Append(CXXFLAGS=["-MD"])
 
 env.VariantDir('build', 'src', duplicate=0)
 langton_bin = env.SConscript('build/SConscript', exports='env')

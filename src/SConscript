@@ -11,6 +11,11 @@ sources = env.Object([
     "types.cpp",
 ])
 
-langton_bin = env.Program("langton", sources, LINKFLAGS=['-SUBSYSTEM:CONSOLE'])
+linkflags = []
+
+if env['PLATFORM'] == 'nt':
+    linkflags += ['-SUBSYSTEM:CONSOLE']
+
+langton_bin = env.Program("langton", sources, LINKFLAGS=linkflags)
 
 Return('langton_bin')
