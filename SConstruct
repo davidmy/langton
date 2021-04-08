@@ -1,4 +1,7 @@
+import os
+
 env = Environment()
+env.Replace(PLATFORM=os.name)
 
 conan = env.SConscript("SConscript_conan")
 if not conan:
