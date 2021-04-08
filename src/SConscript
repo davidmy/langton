@@ -1,0 +1,16 @@
+Import('env')
+
+sources = env.Object([
+    "main.cpp",
+    "grid.cpp",
+    "ant.cpp",
+    "button.cpp",
+    "gui.cpp",
+    "simulation.cpp",
+    "loadedsimulation.cpp",
+    "types.cpp",
+])
+
+langton_bin = env.Program("langton", sources, LINKFLAGS=['-SUBSYSTEM:CONSOLE'])
+
+Return('langton_bin')

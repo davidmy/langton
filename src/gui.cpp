@@ -1,3 +1,8 @@
+#include <iostream>
+#include <stdexcept>
+
+#include <SDL2/SDL.h>
+
 #include "gui.h"
 #include "button.h"
 #include "version.h"
@@ -5,11 +10,6 @@
 #include "grid.h"
 #include "ant.h"
 #include "simulation.h"
-
-#include <iostream>
-#include <stdexcept>
-
-#include <SDL2/SDL.h>
 
 unsigned char colors[14][3] = {
   {255, 255, 255},  // white

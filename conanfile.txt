@@ -1,0 +1,14 @@
+[requires]
+sdl2_image/2.0.5
+sdl2/2.0.14@bincrafters/stable
+jsoncpp/1.9.4
+
+[generators]
+scons
+
+[options]
+jsoncpp:shared=False
+sdl2:shared=True
+
+[imports]
+bin, *.dll -> ./bin
